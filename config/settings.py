@@ -1,17 +1,17 @@
 from datetime import timedelta
 from pathlib import Path
-from decouple import Config, RepositoryEnv
+# from decouple import Config, RepositoryEnv
 import os
-import dotenv
+# import dotenv
 import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-env_path = os.path.join(BASE_DIR, ".env")
-env_config = Config(RepositoryEnv(env_path))
+# env_path = os.path.join(BASE_DIR, ".env")
+# env_config = Config(RepositoryEnv(env_path))
 
-dotenv.load_dotenv(env_path)
+# dotenv.load_dotenv(env_path)
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ["SECRET_KEY"]
@@ -263,9 +263,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'venleonink@gmail.com')
+EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
 EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'venleonink@gmail.com')
+DEFAULT_FROM_EMAIL = os.environ['DEFAULT_FROM_EMAIL']
 
 # Channels configuration
 CHANNEL_LAYERS = {
