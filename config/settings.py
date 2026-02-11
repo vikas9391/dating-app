@@ -141,21 +141,29 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database configuration
 # Use DATABASE_URL from environment or default to Hostinger database
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=os.getenv(
+#             'DATABASE_URL',
+#             f"mysql://{os.getenv('DB_USER', 'u968201206_socialapp')}:"
+#             f"{os.getenv('DB_PASSWORD', '')}@"
+#             f"{os.getenv('DB_HOST', 'auth-db1750.hstgr.io')}:"
+#             f"{os.getenv('DB_PORT', '3306')}/"
+#             f"{os.getenv('DB_NAME', 'u968201206_socialapp')}"
+#         ),
+#         conn_max_age=600,
+#         conn_health_checks=True,
+#     )
+# }
+
+
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv(
-            'DATABASE_URL',
-            f"mysql://{os.getenv('DB_USER', 'u968201206_socialapp')}:"
-            f"{os.getenv('DB_PASSWORD', '')}@"
-            f"{os.getenv('DB_HOST', 'auth-db1750.hstgr.io')}:"
-            f"{os.getenv('DB_PORT', '3306')}/"
-            f"{os.getenv('DB_NAME', 'u968201206_socialapp')}"
-        ),
+    "default": dj_database_url.config(
+        default=os.environ.get("DATABASE_URL"),
         conn_max_age=600,
-        conn_health_checks=True,
+        ssl_require=True,
     )
 }
-
 # Password validation
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
