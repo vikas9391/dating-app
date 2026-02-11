@@ -19,6 +19,19 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
+
+
+if os.getenv("CREATE_SUPERUSER") == "True":
+    from django.contrib.auth import get_user_model
+    User = get_user_model()
+    if not User.objects.filter(username="admin").exists():
+        User.objects.create_superuser(
+            "admin",
+            "datingapp896@gmail.com",
+            "123123a@"
+        )
+
+
 # Allowed hosts
 ALLOWED_HOSTS = os.getenv(
     'ALLOWED_HOSTS',
