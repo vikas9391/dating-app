@@ -309,17 +309,3 @@ CACHES = {
 # Razorpay configuration
 RAZORPAY_KEY_ID = os.getenv("RAZORPAY_KEY_ID", "")
 RAZORPAY_KEY_SECRET = os.getenv("RAZORPAY_KEY_SECRET", "")
-
-
-if os.getenv("CREATE_SUPERUSER") == "True":
-    User = get_user_model()
-    if not User.objects.filter(username="admin").exists():
-        print("Creating admin user...")
-        User.objects.create_superuser(
-            username="admin",
-            email="datingapp896@gmail.com",
-            password="123123a@"
-        )
-    else:
-        print("Admin already exists.")
-
