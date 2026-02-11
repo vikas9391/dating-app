@@ -2,6 +2,7 @@ from datetime import timedelta
 from pathlib import Path
 # from decouple import Config, RepositoryEnv
 import os
+from django.contrib.auth import get_user_model
 # import dotenv
 import dj_database_url
 
@@ -19,17 +20,6 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-
-
-if os.getenv("CREATE_SUPERUSER") == "True":
-    from django.contrib.auth import get_user_model
-    User = get_user_model()
-    if not User.objects.filter(username="admin").exists():
-        User.objects.create_superuser(
-            "admin",
-            "datingapp896@gmail.com",
-            "123123a@"
-        )
 
 
 # Allowed hosts
@@ -319,3 +309,17 @@ CACHES = {
 # Razorpay configuration
 RAZORPAY_KEY_ID = os.getenv("RAZORPAY_KEY_ID", "")
 RAZORPAY_KEY_SECRET = os.getenv("RAZORPAY_KEY_SECRET", "")
+
+
+if os.getenv("CREATE_SUPERUSER") == "True":
+    User = get_user_model()
+    if not User.objects.filter(username="admin").exists():
+        print("Creating admin user...")
+        User.objects.create_superuser(
+            username="admin",
+            email="datingapp896@gmail.com",
+            password="123123a@"
+        )
+    else:
+        print("Admin already exists.")
+
